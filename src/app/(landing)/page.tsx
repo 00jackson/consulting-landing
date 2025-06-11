@@ -1,6 +1,6 @@
 import { Header } from "./components/header";
 import { Hero } from "./components/hero";
-import { Services } from "./components/services";
+import { ClientSolutions } from "./components/services";
 import { Testimonials } from "./components/testimonials";
 import { CTA } from "./components/cta";
 import { Footer } from "./components/footer";
@@ -12,7 +12,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col items-center">
         <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <Hero />
-          <Services />
+          <ClientSolutions />
           <Testimonials />
           <CTA />
         </div>

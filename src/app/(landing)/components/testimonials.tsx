@@ -3,91 +3,132 @@
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { Star, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
     name: "Sarah Johnson",
     role: "CEO, TechStart Inc.",
     content:
-      "Nexus Consulting transformed our business operations. Their strategic insights helped us scale efficiently while maintaining our company culture.",
+      "Nexus Consulting delivered a 40% operational efficiency gain within six months. Their strategic framework became our playbook for sustainable scaling while preserving our culture.",
     avatar: "/avatars/sarah.jpg",
     initials: "SJ",
+    results: ["40% efficiency gain", "3 new markets entered", "25% cost reduction"],
+    rating: 5
   },
   {
     name: "Michael Chen",
     role: "Founder, GreenSolutions",
     content:
-      "The financial advisory we received was game-changing. We doubled our profitability within a year of implementing their recommendations.",
+      "Their financial restructuring increased our EBITDA by 112% year-over-year. The implementation support ensured we realized value faster than anticipated.",
     avatar: "/avatars/michael.jpg",
     initials: "MC",
+    results: ["112% EBITDA growth", "18-month ROI", "Investor-ready reporting"],
+    rating: 5
   },
   {
     name: "Emma Rodriguez",
     role: "Director, Global Retail Co.",
     content:
-      "Their market analysis gave us the competitive edge we needed. Highly recommend their services to any business looking to grow strategically.",
+      "The market penetration strategy developed with Nexus captured 15% new market share in Q3 alone. Their insights revealed opportunities we'd overlooked for years.",
     avatar: "/avatars/emma.jpg",
     initials: "ER",
+    results: ["15% market share gain", "22% revenue lift", "Competitor benchmarking"],
+    rating: 5
   },
 ];
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-20">
-      <div className="w-full flex justify-center">
-        <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-3xl font-bold mb-4"
-            >
-              Client Success Stories
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-muted-foreground max-w-2xl mx-auto"
-            >
-              Don&apos;t just take our word for it. Here&apos;s what our clients have to say
-              about working with us.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full">
-                  <CardContent className="p-6">
-                    <p className="italic mb-6">&ldquo;{testimonial.content}&rdquo;</p>
-                    <div className="flex items-center space-x-4">
-                      <Avatar>
-                        <AvatarImage src={testimonial.avatar} />
-                        <AvatarFallback>{testimonial.initials}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium">{testimonial.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+    <section id="results" className="py-24 bg-gradient-to-b from-background to-muted/10">
+      <div className="container">
+        <div className="text-center mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold mb-5"
+          >
+            <span className="text-gradient">Proven</span> Business Transformations
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-muted-foreground max-w-3xl mx-auto text-lg"
+          >
+            Quantifiable outcomes from organizations that trusted our expertise
+          </motion.p>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={testimonial.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+                <CardContent className="p-8">
+                  <div className="flex mb-1">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  
+                  <blockquote className="italic text-lg mb-6 leading-relaxed">
+                    &ldquo;{testimonial.content}&rdquo;
+                  </blockquote>
+                  
+                  <div className="mb-6 space-y-2">
+                    {testimonial.results.map((result, i) => (
+                      <div key={i} className="flex items-start">
+                        <ArrowRight className="w-4 h-4 mt-1 mr-2 text-primary flex-shrink-0" />
+                        <p className="text-sm">{result}</p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="flex items-center space-x-4 pt-4 border-t">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src={testimonial.avatar} />
+                      <AvatarFallback>{testimonial.initials}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-medium">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <p className="text-muted-foreground text-sm uppercase tracking-wider mb-2">
+            Industry Recognition
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-80 hover:opacity-100 transition-opacity">
+            {/* Replace with actual client logos */}
+            <div className="h-8 w-auto bg-muted/50 rounded"></div>
+            <div className="h-8 w-auto bg-muted/50 rounded"></div>
+            <div className="h-8 w-auto bg-muted/50 rounded"></div>
+            <div className="h-8 w-auto bg-muted/50 rounded"></div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
